@@ -10,5 +10,9 @@
   },
   "devDependencies": {
     "vite": "^5.4.8"
+  },
+  "dependencies": {
+    "fast-shuffle": "^6.1.0",
+    "fuse.js": "^7.0.0"
   }
 }
