@@ -1,62 +1,74 @@
+// change Ordering
 import { shuffle } from "fast-shuffle";
+// Fuzzy searching
 import Fuse from "fuse.js";
-
+// Data
 import data from "./data.json";
 import PokemonCard from "./components/PokemonCard";
 
-const inputEl = document.querySelector("#floatingInputGroup1");
-const pokemonRow = document.querySelector("[pokemon-row]");
+// DOM Selection
+const inputEl = document.querySelector("input");
+const pokemonRow = document.querySelector("[data-pokemon-row]");
 
-// render
-function renderPokemon(list) {
+// Render
+function renderPokemons(list) {
+  // Empty the previous content
   pokemonRow.innerHTML = "";
-
-  list.forEach((PokemonObj) => {
-    const { name, image, description, link } = PokemonObj;
+// Iterate
+  list.forEach((pokemonObj) => {
+    const { name, image, description, link } = pokemonObj;
     const pokemon = PokemonCard(name, image, description, link);
     pokemonRow.appendChild(pokemon);
   });
 }
-// filtering
-function randerFilterPokemons(input) {
-  // const filterPokemon = data.filter((object) =>
-  //   object.name.toLocaleLowerCase().includes(input)
+
+// Filtering
+function renderFilterPokemons(input) {
+  // const filteredPokemons = data.filter((obj) =>
+  //   obj.name.toLowerCase().includes(input)
   // );
 
+  // (input === 0) another option 
   if (!input) {
-    return renderPokemon(data);
+    return renderPokemons(data);
   }
+// fuzzing on data
   const fuse = new Fuse(data, {
     keys: ["name"],
   });
 
-  const filterPokemon = fuse.search(input).map((object) => object.item);
-  if (!filterPokemon.length) {
-    renderPokemon([
+  const filteredPokemons = fuse.search(input).map((obj) => obj.item);
+
+  // Fallback Pokemon Card
+  if (!filteredPokemons.length) {
+    renderPokemons([
       {
-        name: "not found",
+        name: "Not Found",
         image:
-          "https://e7.pngegg.com/pngimages/10/205/png-clipart-computer-icons-error-information-error-angle-triangle-thumbnail.png",
-        description: "Bhai kuch our type kar",
-        link: "",
+          "https://img.freepik.com/free-vector/horns-emoji-illustration_23-2151300267.jpg?w=740&t=st=1729151137~exp=1729151737~hmac=b612a9e3b3a87f1efc08ed4eee6e245a50e74f20717176c1362084a86ada7408",
+        description: "Try a different search term",
+        link: "https://pokemon.com",
       },
     ]);
+
     return;
   }
 
-  renderPokemon(filterPokemon);
+  renderPokemons(filteredPokemons);
 }
-// AddEventListioner
+
+// Listen for input
 inputEl.addEventListener("input", (e) => {
-  const currInput = e.target.value.toLowerCase().trim();
-  randerFilterPokemons(currInput);
+  const currentInput = e.target.value.toLowerCase().trim();
+  renderFilterPokemons(currentInput);
 });
 
-//  add "/" key word
-document.addEventListener("keyup", (input) => {
-  if (input.key === "/") {
+// Add keyboard functionality
+document.addEventListener("keyup", (event) => {
+  if (event.key === "/") {
     inputEl.focus();
   }
 });
-// Shuffle data
-renderPokemon(shuffle(data));
+
+// Inital Rendering
+renderPokemons(shuffle(data));

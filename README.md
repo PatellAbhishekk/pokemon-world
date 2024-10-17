@@ -24,3 +24,5 @@ common js modules (require & module.exports) import and export statements type: 
 filtering
 
 `npm install fuse.js`
+
+`Mobile view Extension`
