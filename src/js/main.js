@@ -26,7 +26,7 @@ function renderPokemons(list) {
 function renderFilterPokemons(input) {
   // const filteredPokemons = data.filter((obj) =>
   //   obj.name.toLowerCase().includes(input)
-  // );
+  // ); another option
 
   // (input === 0) another option 
   if (!input) {
@@ -47,7 +47,7 @@ function renderFilterPokemons(input) {
         image:
           "https://img.freepik.com/free-vector/horns-emoji-illustration_23-2151300267.jpg?w=740&t=st=1729151137~exp=1729151737~hmac=b612a9e3b3a87f1efc08ed4eee6e245a50e74f20717176c1362084a86ada7408",
         description: "Try a different search term",
-        link: "https://pokemon.com",
+        // link: "https://pokemon.com",
       },
     ]);
 
@@ -58,6 +58,7 @@ function renderFilterPokemons(input) {
 }
 
 // Listen for input
+// e = event > target > value
 inputEl.addEventListener("input", (e) => {
   const currentInput = e.target.value.toLowerCase().trim();
   renderFilterPokemons(currentInput);
