@@ -14,12 +14,15 @@ const pokemonRow = document.querySelector("[data-pokemon-row]");
 function renderPokemons(list) {
   // Empty the previous content
   pokemonRow.innerHTML = "";
+  // fragment flexible
+  const fragment = createDocumentFragment();
   // Iterate
   list.forEach((pokemonObj) => {
     const { name, image, description, link } = pokemonObj;
     const pokemon = PokemonCard(name, image, description, link);
-    pokemonRow.appendChild(pokemon);
+    fragment.appendChild(pokemon);
   });
+  pokemonRow.appendChild(fragment);
 }
 
 // Filtering
@@ -34,7 +37,8 @@ function renderFilterPokemons(input) {
   }
   // fuzzing on data
   const fuse = new Fuse(data, {
-    keys: ["name"],
+    keys: ["name", ""],
+    // fuse Intensity
     threshold: 0.5,
   });
 
