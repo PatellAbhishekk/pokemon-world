@@ -14,7 +14,7 @@ const pokemonRow = document.querySelector("[data-pokemon-row]");
 function renderPokemons(list) {
   // Empty the previous content
   pokemonRow.innerHTML = "";
-// Iterate
+  // Iterate
   list.forEach((pokemonObj) => {
     const { name, image, description, link } = pokemonObj;
     const pokemon = PokemonCard(name, image, description, link);
@@ -28,13 +28,14 @@ function renderFilterPokemons(input) {
   //   obj.name.toLowerCase().includes(input)
   // ); another option
 
-  // (input === 0) another option 
+  // (input === 0) another option
   if (!input) {
     return renderPokemons(data);
   }
-// fuzzing on data
+  // fuzzing on data
   const fuse = new Fuse(data, {
     keys: ["name"],
+    threshold: 0.5,
   });
 
   const filteredPokemons = fuse.search(input).map((obj) => obj.item);
