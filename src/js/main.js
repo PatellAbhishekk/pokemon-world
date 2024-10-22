@@ -15,7 +15,7 @@ function renderPokemons(list) {
   // Empty the previous content
   pokemonRow.innerHTML = "";
   // fragment flexible
-  const fragment = createDocumentFragment();
+  const fragment = document.createDocumentFragment();
   // Iterate
   list.forEach((pokemonObj) => {
     const { name, image, description, link } = pokemonObj;
@@ -27,6 +27,7 @@ function renderPokemons(list) {
 
 // Filtering
 function renderFilterPokemons(input) {
+  console.log("hello");
   // const filteredPokemons = data.filter((obj) =>
   //   obj.name.toLowerCase().includes(input)
   // ); another option
@@ -37,7 +38,7 @@ function renderFilterPokemons(input) {
   }
   // fuzzing on data
   const fuse = new Fuse(data, {
-    keys: ["name", ""],
+    keys: ["name", "abilities"],
     // fuse Intensity
     threshold: 0.5,
   });
@@ -61,12 +62,16 @@ function renderFilterPokemons(input) {
 
   renderPokemons(filteredPokemons);
 }
-
+// Debouncing fctn
+let Debouncing;
 // Listen for input
 // e = event > target > value
 inputEl.addEventListener("input", (e) => {
-  const currentInput = e.target.value.toLowerCase().trim();
-  renderFilterPokemons(currentInput);
+  clearTimeout(Debouncing);
+  Debouncing = setTimeout(() => {
+    const currentInput = e.target.value.toLowerCase().trim();
+    renderFilterPokemons(currentInput);
+  }, 300);
 });
 
 // Add keyboard functionality
