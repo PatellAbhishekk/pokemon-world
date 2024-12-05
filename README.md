@@ -1,28 +1,13 @@
 # pokemon-world
-revise async vs defer ec, gec, memory and heap, creation & execution phase
 
-node, deno, bun: to run js outside the browser
+![mockup](mockup.png)
 
-node main.js
+## Getting Started
 
-npm init -y npx live-server npx gitignore node
+First, run the development server:
 
-`nodemon`
+```bash
+npm run dev
 
-npm install --save-dev nodemon package.json "start", "dev"
 
-node_modules filteringdo not track
-
-`npm create vite@latest` .
-
-bootstrap ka navbar
-
-public/
-
-common js modules (require & module.exports) import and export statements type: 'module'
-
-filtering
-
-`npm install fuse.js`
-
-`Mobile view Extension`
+```

@@ -15,5 +15,6 @@
   "dependencies": {
     "fast-shuffle": "^6.1.0",
     "fuse.js": "^7.0.0"
-  }
+  },
+  "license": "MIT"
 }
